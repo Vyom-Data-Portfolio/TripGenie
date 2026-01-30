@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  tripgenie:
+    build: .
+    container_name: tripgenie-app
+    ports:
+      - "8501:8501"
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - PRIMARY_MODEL=${PRIMARY_MODEL:-claude-sonnet-4-20250514}
+      - SECONDARY_MODEL=${SECONDARY_MODEL:-claude-sonnet-4-20250514}
+      - TEMPERATURE=${TEMPERATURE:-0.0}
+      - MAX_TOKENS=${MAX_TOKENS:-4000}
+    volumes:
+      - .:/app
+    restart: unless-stopped
